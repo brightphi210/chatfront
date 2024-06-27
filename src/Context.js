@@ -1,14 +1,14 @@
-// UserContext.js
-import React, { createContext, useState } from 'react';
 
-export const UserContext = createContext();
+import { Outlet, Navigate } from "react-router-dom";
+import { useState, useContext, createContext } from "react";
 
-export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
 
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
+
+const PrivateRoute = () => {
+    const sender = localStorage.getItem('username')
+    return sender ? <Outlet /> : <Navigate to={'/join'}/>
+}
+
+export default PrivateRoute; 
+
+

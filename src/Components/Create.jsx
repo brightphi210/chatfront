@@ -36,7 +36,7 @@ const Create = () => {
 
                 localStorage.setItem('room_name', values.room);
 
-                
+
                 setTimeout(() => {
                     navigate('/join')
                 }, 1000);
@@ -69,7 +69,7 @@ const Create = () => {
 
         {show && (<>
         
-            <div role="alert" data-aos="fade-up" data-aos-duration="500" className="alert alert-success text-xs max-h-[4rem] text-white absolute w-fit top-20">
+            <div role="alert" data-aos="fade-up" data-aos-duration="500" className="alert alert-success  text-xs max-h-[4rem] text-white absolute w-fit top-20">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 shrink-0 stroke-current"
@@ -86,9 +86,9 @@ const Create = () => {
         </>)}
 
 
-      <form action="" autoComplete='off' onSubmit={handleSubmit} className='flex flex-col w-[25%] gap-4'>
+      <form action="" autoComplete='off' onSubmit={handleSubmit} className='flex flex-col 2xl:w-[25%] w-full px-5 2xl:p-0 gap-4'>
 
-        <h2 className='text-center'>Create a room </h2>
+        <h2 className='text-center text-lg font-bold'>Create a room </h2>
         <input 
             type="text" 
             placeholder="Enter username"  
@@ -114,7 +114,7 @@ const Create = () => {
         {errors.room && <p className="text-red-400 text-xs font-light">{errors.room}</p>}
 
 
-        <button type="submit" className="btn btn-neutral bg-blue-800 border-none hover:bg-blue-900">{loading === true ? <span className="loading loading-spinner loading-sm"></span> :  'CreateRoom'}</button>
+        <button type="submit" className="btn btn-neutral bg-blue-800 border-none hover:bg-blue-900">{loading === true ? <span className="loading loading-spinner loading-sm"></span> :  'Create'}</button>
       </form>
     </div>
   )

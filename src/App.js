@@ -8,22 +8,24 @@ import 'aos/dist/aos.css';
 import StartPage from './Pages/StartPage';
 import JoinPage from './Pages/JoinPage';
 import ChatPage from './Pages/ChatPage';
-import { UserProvider } from './Context';
+import PrivateRoute from './Context';
+
 AOS.init();
 
 function App() {
   return (
     <div className="App">
-      <UserProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<StartPage />} />
           <Route path="/join" element={<JoinPage />} />
           <Route path="/create" element={<CreatePage />} />
-          <Route path="/chats/:room" element={<ChatPage />} />
+
+          <Route element={<PrivateRoute />}>
+            <Route path="/chats/:room" element={<ChatPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
-      </UserProvider>
     </div>
   );
 }

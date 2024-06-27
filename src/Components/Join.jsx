@@ -2,7 +2,6 @@ import React, { useState, useContext     } from 'react'
 import { validationSchema } from './validate';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../Context';
 
 const Join = () => {
 
@@ -10,7 +9,6 @@ const Join = () => {
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('')
     const [show, setShow] = useState(false)
-    const { setUser } = useContext(UserContext);
     
     // const url = `http://127.0.0.1:8000/api/chats/${values.room}/`
     
@@ -80,9 +78,9 @@ const Join = () => {
         </>)}
 
 
-      <form action="" autoComplete='off' onSubmit={handleSubmit} className='flex flex-col w-[25%] gap-4'>
+      <form action="" autoComplete='off' onSubmit={handleSubmit} className='flex flex-col 2xl:w-[25%] w-full px-5 2xl:p-0 gap-4'>
 
-        <h2 className='text-center'>Join Room</h2>
+        <h2 className='text-center text-lg font-bold'>Join Room</h2>
         <input 
             type="text" 
             placeholder="Enter username"  
