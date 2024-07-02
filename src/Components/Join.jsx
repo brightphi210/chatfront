@@ -14,7 +14,7 @@ const Join = () => {
     
     const onSubmitFunc = async () => {
 
-        const response = await fetch(`http://127.0.0.1:8000/api/chats/${values.room}/`, {
+        const response = await fetch(`https://chat-cs4t.onrender.com/api/chats/${values.room}/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

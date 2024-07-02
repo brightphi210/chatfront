@@ -9,10 +9,8 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [messages1, setMessages1] = useState([]);
     const [message, setMessage] = useState('');
-    const [isDisable, setIsDisable] = useState(false);
+    const [isLoading, setIsloading] = useState(false);
 
-    // const [sender, setToken] = useState(()=> localStorage.getItem('username') ? JSON.parse(localStorage.getItem('username')) : null)
-    // const [room_name, setTokena] = useState(()=> localStorage.getItem('room_name') ? JSON.parse(localStorage.getItem('room_name')) : null)
     const sender = localStorage.getItem('username')
     const room_name = localStorage.getItem('room_name')
     console.log('This is sender', sender);
@@ -26,16 +24,15 @@ const Chat = () => {
   let ws;
 
   useEffect(() => {
-
     const fetchMessages = async () => {
-        const response = await fetch(`http://127.0.0.1:8000/api/chatsAll/${room_name}`); // Replace with your API endpoint
+        const response = await fetch(`https://chat-cs4t.onrender.com/api/chatsAll/${room_name}`); // Replace with your API endpoint
         const data = await response.json();
         setMessages1(data.messages);
     };
 
-
     const websocketProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    const wsEndpoint = `${websocketProtocol}://localhost:8000/ws/notification/${room_name}/`;
+    // const wsEndpoint = `${websocketProtocol}://localhost:8000/ws/notification/${room_name}/`;
+    const wsEndpoint = `wss://chat-cs4t.onrender.com/ws/notification/${room_name}/`;
 
     ws = new WebSocket(wsEndpoint);
 
@@ -64,11 +61,15 @@ const Chat = () => {
     };
   }, [room_name]);
 
+    const websocketProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+    // const wsEndpoint = `${websocketProtocol}://localhost:8000/ws/notification/${room_name}/`;
+    const wsEndpoint = `wss://chat-cs4t.onrender.com/ws/notification/${room_name}/`;
 
-  const websocketProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-  const wsEndpoint = `${websocketProtocol}://localhost:8000/ws/notification/${room_name}/`;
+
   
     const sendMessage = () => {
+
+        setIsloading(true)
         const socket = new WebSocket(wsEndpoint);
         socket.onopen = () => {
             socket.send(
@@ -78,8 +79,11 @@ const Chat = () => {
                     sender
                 })
             );
+        setIsloading(false)
+
         };
         setMessage('')
+
     };
 
 
@@ -87,7 +91,7 @@ const Chat = () => {
 
   return (
     <div>
-        <div className='flex 2xl:px-[10rem] px-5 items-center bg-neutral-100 w-full py-4 fixed'>
+        <div className='flex 2xl:px-[10rem] px-5 items-center bg-neutral-100 w-full py-4 fixed z-50'>
             <h2 className='text-xs'><span className='text-blue-600 font-bold'>{room_name.toLocaleUpperCase()}</span> Group Chat</h2>
             <h2 className='text-xs ml-auto cursor-pointer bg-blue-600 py-2 px-5 text-white rounded-full' onClick={leaveChat}>Leave Group</h2>
         </div>
@@ -164,9 +168,8 @@ const Chat = () => {
                 </div>
                 ))}
             </div>
-        )
-    
-        }
+        )}
+
 
         <div className=' absolute bottom-0 py-5 pt-5 border-t bg-white border-neutral-200 w-full right-0 left-0 justify-center 2xl:px-[10rem] px-5'>
 
@@ -177,8 +180,8 @@ const Chat = () => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
             />
-            <button disabled={!message} type='button' onClick={sendMessage} className="border-none bg-blue-700 text-white absolute rounded-full p-3 2xl:top-2 top-1 right-2 2xl:right-4">
-                <IoSend />
+            <button disabled={!message} type='button' onClick={sendMessage} className="border-none bg-blue-700 text-white absolute flex gap-3 items-center rounded-full py-3 px-5 right-1.5 top-1 ht-full">
+                {isLoading === false ?  <>Send <IoSend /></>  : <span className="loading loading-spinner loading-md"></span>}
             </button>
         </div>
         </div>
