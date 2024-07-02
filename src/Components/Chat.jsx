@@ -180,7 +180,7 @@ const Chat = () => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
             />
-            <button disabled={!message} type='button' onClick={sendMessage} className="border-none bg-blue-700 text-white absolute flex gap-3 items-center rounded-full py-3 px-5 right-1.5 top-1 ht-full">
+            <button disabled={!message} type='button' onClick={sendMessage} className="border-none bg-blue-700 text-white absolute text-xs flex gap-3 items-center rounded-full py-3 lg:px-5 px-4 lg:right-1.5 right-0 lg:top-1 h-[3rem]">
                 {isLoading === false ?  <>Send <IoSend /></>  : <span className="loading loading-spinner loading-md"></span>}
             </button>
         </div>
