@@ -43,13 +43,14 @@ const Create = () => {
                 localStorage.setItem('room_name', values.room);
 
 
-                setTimeout(() => {
-                    navigate('/join')
-                }, 1000);
+                // setTimeout(() => {
+                //     navigate('/join')
+                // }, 1000);
 
                 setLoading(false)
                 setShow(true);
                 setMessage(data.message)
+                document.getElementById('my_modal_3').showModal()
             }
 
             else if(response.status === 400) {
@@ -187,7 +188,7 @@ const Create = () => {
       </form>
 
         {/* You can open the modal using document.getElementById('ID').showModal() method */}
-        <button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}>open modal</button>
+        {/* <button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}>open modal</button> */}
         <dialog id="my_modal_3" className="modal">
         <div className="modal-box h-[25rem] relative justify-center items-center flex">
 
@@ -206,16 +207,21 @@ const Create = () => {
 
                     <div className='flex flex-col gap-3'>
                         <input onClick={() => copyToClipboard('https://voicechats.vercel.app/join')} type="text" value="https://voicechats.vercel.app/join" readOnly  
-                            className='outline-none text-center text-sm text-blue-700 underline cursor-pointer'/>
-                        <button onClick={() => copyToClipboard( `Hello 👋😊,hope you're doing well, I wanted to invite you to Join me on VOICE APP for a chat. Looking forward to chatting with you soon! https://voicechats.vercel.app/join , my VOICE APP Room name is 👉 ${room_name}`)} 
-                        className='bg-blue-700 text-white py-3 rounded-md text-xs mt-3'>{copySuccess ? copySuccess : 'Copy Invitation Link'}</button>
-                        <Link to={'/join'}><button className='bg-green-700 m-auto w-full text-white py-3 rounded-md text-xs mt-2'>Join Your Room</button></Link>
+                            className='outline-none text-center text-sm text-blue-700 underline cursor-pointer'
+                        />
+
+                        <div className='flex items-center w-full mt-3 gap-5'>
+                            <button onClick={() => copyToClipboard( `Hello 👋😊,hope you're doing well, I wanted to invite you to Join me on VOICE APP for a chat. Looking forward to chatting with you soon! https://voicechats.vercel.app/join , my VOICE APP Room name is 👉 ${room_name}`)} 
+                                className='bg-blue-700 text-white py-3 rounded-md text-xs w-full'>{copySuccess ? copySuccess : 'Copy Invitation Link'}
+                            </button>
+                            <button onClick={handleShare} className='w-[60%] border border-blue-600 p-3 rounded-md text-xs text-blue-600'>Share Link</button>
+                        </div>
+                        
+                        
+                        <Link to={'/join'}><button className='bg-green-700 m-auto w-full text-white p-3 rounded-md text-xs mt-2'>Join Your Room</button></Link>
                     </div>
 
 
-                    <button onClick={handleShare}>
-                    Share this link
-                    </button>
                 </div>
             </div>
         </div>
