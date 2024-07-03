@@ -2,6 +2,7 @@ import React, { useState, useContext     } from 'react'
 import { validationSchema } from './validate';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { IoSend } from 'react-icons/io5';
 
 const Join = () => {
 
@@ -59,12 +60,12 @@ const Join = () => {
 
 
   return (
-    <div className='flex justify-center h-screen items-center'>
+    <div className='flex justify-center lg:h-screen h-[90vh] items-center'>
         
 
         {show && (<>
         
-            <div role="alert" data-aos="fade-up" data-aos-duration="500" className="alert alert-error text-xs max-h-[4rem] text-white absolute w-fit top-20">
+            <div role="alert" data-aos="fade-up" data-aos-duration="500" className="alert alert-error text-xs max-h-[3rem] text-white flex items-center absolute w-fit top-20">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 shrink-0 stroke-current"
@@ -83,7 +84,8 @@ const Join = () => {
 
       <form action="" autoComplete='off' onSubmit={handleSubmit} className='flex flex-col 2xl:w-[25%] w-full px-5 2xl:p-0 gap-4'>
 
-        <h2 className='text-center text-lg font-bold'>Join Room</h2>
+        <h2 className='text-center text-lg font-bold'>JOIN EXISTING ROOM 😍😍</h2>
+        <p className='text-sm text-center'>Join a room and start chatting with friends</p>
         <input 
             type="text" 
             placeholder="Enter username"  
@@ -107,7 +109,7 @@ const Join = () => {
         {errors.room && <p className="text-red-400 text-xs font-light">{errors.room}</p>}
 
 
-        <button type="submit" className="btn btn-neutral bg-blue-800 border-none hover:bg-blue-900">{loading === true ? <span className="loading loading-spinner loading-sm"></span> :  'Join Room'}</button>
+        <button type="submit" className="btn btn-neutral bg-blue-800 border-none hover:bg-blue-900">{loading === true ? <span className="loading loading-spinner flex items-center gap-3 loading-sm"></span> :  <>Join Room <IoSend /></>}</button>
       </form>
     </div>
   )

@@ -26,7 +26,7 @@ const Chat = () => {
 
   useEffect(() => {
     const fetchMessages = async () => {
-        const response = await fetch(`https://chat-cs4t.onrender.com/api/chatsAll/${room_name}`); // Replace with your API endpoint
+        const response = await fetch(`https://chat-cs4t.onrender.com/api/chatsAll/${room_name}`);
         const data = await response.json();
         console.log('This is my data',data);
         setMessages1(data.messages);
