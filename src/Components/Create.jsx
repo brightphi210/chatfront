@@ -97,8 +97,8 @@ const Create = () => {
           try {
             await navigator.share({
               title: 'Check this out!',
-              text: 'This is an interesting link:',
-              url: 'https://yourlink.com',
+              text: `Hello 👋😊,hope you're doing well, I wanted to invite you to Join me on VOICE APP for a chat. Looking forward to chatting with you soon! https://voicechats.vercel.app/join , my VOICE APP Room name is 👉 ${room_name}`,
+              url: 'https://voicechats.vercel.app/join',
             });
             console.log('Link shared successfully');
           } catch (error) {
@@ -207,8 +207,8 @@ const Create = () => {
                     <div className='flex flex-col gap-3'>
                         <input onClick={() => copyToClipboard('https://voicechats.vercel.app/join')} type="text" value="https://voicechats.vercel.app/join" readOnly  
                             className='outline-none text-center text-sm text-blue-700 underline cursor-pointer'/>
-                        <button onClick={() => copyToClipboard( `
-                            Hello 👋😊,hope you're doing well, I wanted to invite you to Join me on VOICE APP for a chat. Looking forward to chatting with you soon! https://voicechats.vercel.app/join , my VOICE APP Room name is 👉 ${room_name}`)} className='bg-blue-700 text-white py-3 rounded-md text-xs mt-3'>{copySuccess ? copySuccess : 'Copy Invitation Link'}</button>
+                        <button onClick={() => copyToClipboard( `Hello 👋😊,hope you're doing well, I wanted to invite you to Join me on VOICE APP for a chat. Looking forward to chatting with you soon! https://voicechats.vercel.app/join , my VOICE APP Room name is 👉 ${room_name}`)} 
+                        className='bg-blue-700 text-white py-3 rounded-md text-xs mt-3'>{copySuccess ? copySuccess : 'Copy Invitation Link'}</button>
                         <Link to={'/join'}><button className='bg-green-700 m-auto w-full text-white py-3 rounded-md text-xs mt-2'>Join Your Room</button></Link>
                     </div>
 
