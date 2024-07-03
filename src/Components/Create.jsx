@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { validationSchema } from './validate';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoSend } from "react-icons/io5";
 const Create = () => {
 
     const navigate = useNavigate()
+
+    const room_name = localStorage.getItem('room_name')
 
 
     const url = 'https://chat-cs4t.onrender.com/api/'
@@ -76,6 +78,38 @@ const Create = () => {
         validationSchema : validationSchema,
         onSubmit: onSubmitFunc,
     })
+
+
+    const [copySuccess, setCopySuccess] = useState('');
+
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text).then(
+          () => setCopySuccess('Copied!'),
+          (err) => setCopySuccess('Failed to copy!')
+        );
+      };
+
+
+
+
+      const handleShare = async () => {
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: 'Check this out!',
+              text: 'This is an interesting link:',
+              url: 'https://yourlink.com',
+            });
+            console.log('Link shared successfully');
+          } catch (error) {
+            console.error('Error sharing the link:', error);
+          }
+        } else {
+          alert('Web Share API is not supported in your browser.');
+        }
+      };
+
+
 
 
   return (
@@ -152,7 +186,40 @@ const Create = () => {
         <button type="submit" className="btn btn-neutral bg-blue-800 border-none hover:bg-blue-900">{loading === true ? <span className="loading flex items-center gap-3 loading-spinner loading-sm"></span> :  <>Create Room<IoSend /></>}</button>
       </form>
 
+        {/* You can open the modal using document.getElementById('ID').showModal() method */}
+        <button className="btn" onClick={()=>document.getElementById('my_modal_3').showModal()}>open modal</button>
+        <dialog id="my_modal_3" className="modal">
+        <div className="modal-box h-[25rem] relative justify-center items-center flex">
 
+            <div className='lg:p-8 p-5'>
+                <form method="dialog">
+                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                </form>
+                <div>
+
+                    <h3 className="text-lg font-bold text-center">Invite Your Friends</h3>
+                    <p className='py-3 text-center lg:text-sm text-xs'>
+                        Hello 👋😊, lt I wanted to invite 
+                        you to Join me on VOICE for a chat. 
+                        Looking forward to chatting with you soon!
+                    </p>
+
+                    <div className='flex flex-col gap-3'>
+                        <input onClick={() => copyToClipboard('https://voicechats.vercel.app/join')} type="text" value="https://voicechats.vercel.app/join" readOnly  
+                            className='outline-none text-center text-sm text-blue-700 underline cursor-pointer'/>
+                        <button onClick={() => copyToClipboard( `
+                            Hello 👋😊,hope you're doing well, I wanted to invite you to Join me on VOICE APP for a chat. Looking forward to chatting with you soon! https://voicechats.vercel.app/join , my VOICE APP Room name is 👉 ${room_name}`)} className='bg-blue-700 text-white py-3 rounded-md text-xs mt-3'>{copySuccess ? copySuccess : 'Copy Invitation Link'}</button>
+                        <Link to={'/join'}><button className='bg-green-700 m-auto w-full text-white py-3 rounded-md text-xs mt-2'>Join Your Room</button></Link>
+                    </div>
+
+
+                    <button onClick={handleShare}>
+                    Share this link
+                    </button>
+                </div>
+            </div>
+        </div>
+        </dialog>
     </div>
   )
 }
