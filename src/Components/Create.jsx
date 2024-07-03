@@ -19,10 +19,6 @@ const Create = () => {
     const [message1, setMessage1] = useState('')
     const [show1, setShow1] = useState(false)
 
-
-    setTimeout(() => {
-        setShow(false)
-    }, 1000);
     
     const onSubmitFunc = async () => {
         setLoading(true)
@@ -54,6 +50,9 @@ const Create = () => {
 
                 setLoading(false)
                 setShow(true);
+                setTimeout(() => {
+                    setShow(false)
+                }, 4000);
                 setMessage(data.message)
                 document.getElementById('my_modal_3').showModal()
             }
