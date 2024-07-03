@@ -14,6 +14,8 @@ const Join = () => {
     
     const onSubmitFunc = async () => {
 
+        setLoading(true)
+
         const response = await fetch(`https://chat-cs4t.onrender.com/api/chats/${values.room}/`, {
             method: 'GET',
             headers: {
@@ -35,6 +37,7 @@ const Join = () => {
 
             localStorage.setItem('username', values.username);
             localStorage.setItem('room_name', values.room);
+            localStorage.setItem('exist', data.exists);
 
             // setUser({ username: values.username });
             navigate(`/chats/${values.room}/`)

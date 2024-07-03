@@ -13,7 +13,8 @@ const Chat = () => {
 
     const sender = localStorage.getItem('username')
     const room_name = localStorage.getItem('room_name')
-    console.log('This is sender', sender);
+    const exist = localStorage.getItem('exist')
+    // console.log('This is sender', sender);
 
 
     const leaveChat = () => {
@@ -27,6 +28,7 @@ const Chat = () => {
     const fetchMessages = async () => {
         const response = await fetch(`https://chat-cs4t.onrender.com/api/chatsAll/${room_name}`); // Replace with your API endpoint
         const data = await response.json();
+        console.log('This is my data',data);
         setMessages1(data.messages);
     };
 
@@ -95,6 +97,9 @@ const Chat = () => {
             <h2 className='text-xs'><span className='text-blue-600 font-bold'>{room_name.toLocaleUpperCase()}</span> Group Chat</h2>
             <h2 className='text-xs ml-auto cursor-pointer bg-blue-600 py-2 px-5 text-white rounded-full' onClick={leaveChat}>Leave Group</h2>
         </div>
+
+
+
 
         {messages1 && messages1.length === 0 && messages.length === 0 ? (
             <div className='flex h-screen m justify-center items-center'>
@@ -185,10 +190,6 @@ const Chat = () => {
             </button>
         </div>
         </div>
-        
-
-
-
     </div>
   )
 }
