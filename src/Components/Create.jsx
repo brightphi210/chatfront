@@ -166,7 +166,7 @@ const Create = () => {
     </>)}
 
 
-      <form action="" autoComplete='off' onSubmit={handleSubmit} className='flex flex-col 2xl:w-[25%] w-full px-5 2xl:p-0 gap-4'>
+      <form action="" autoComplete='off' onSubmit={handleSubmit} className='flex flex-col 2xl:w-[25%] xl:w-[40%] lg:w-[40%] md:w-[70%] w-full px-5 2xl:p-0 gap-4'>
 
         <h2 className='text-center text-lg font-bold'>CREAT A ROOM 😊😊</h2>
         <p className='text-sm text-center'>Create a room and start chatting with friends</p>
