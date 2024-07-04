@@ -41,6 +41,7 @@ const Create = () => {
             const data = await response.json();
             if(response.ok || response.status === 200) {
 
+                localStorage.setItem('username', values.username);
                 localStorage.setItem('room_name', values.room);
 
 
@@ -113,6 +114,12 @@ const Create = () => {
           alert('Web Share API is not supported in your browser.');
         }
       };
+
+
+
+      const handleJoinRoom = () =>{
+        navigate(`/chats/${values.room}/`)
+      }
 
 
 
@@ -222,7 +229,7 @@ const Create = () => {
                         </div>
                         
                         
-                        <Link to={'/join'}><button className='bg-green-700 m-auto w-full text-white p-3 rounded-md text-xs mt-2'>Join Your Room</button></Link>
+                        <button className='bg-green-700 m-auto w-full text-white p-3 rounded-md text-xs mt-2' onClick={handleJoinRoom}>Join Your Room</button>
                     </div>
 
 
