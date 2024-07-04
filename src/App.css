@@ -18,3 +18,9 @@
 body{
   font-family: 'Poppins', sans-serif;
 }
+
+
+textarea {
+  white-space: pre-wrap; /* Preserves whitespace and line breaks */
+  word-wrap: break-word; /* Breaks long words to prevent overflow */
+}
